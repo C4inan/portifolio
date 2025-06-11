@@ -5,9 +5,13 @@ body {
 }
 
 header{
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    width: 100%;
     background-color: #051674;
     padding: 20px;
-    text-align: center;   
+    text-align: center;
     padding: 20px 0;
     & nav{
         display: flex;
@@ -22,7 +26,7 @@ header{
         gap: 5px;
         padding: 5px 15px;
         border-radius: 100px;
-        transition: background-color 0.2s ease;
+        transition: background-color 0.2s ease, color 0.2s ease;
         &:hover { 
             background-color: #ffffff;
             color: #051674;
@@ -31,6 +35,7 @@ header{
 }
 
 section {
+    scroll-margin-top: 95px;
     padding: 10px 20px;
     width: 100%;
     max-width:500px;
@@ -42,6 +47,7 @@ section {
     }
 }
 main {
+    margin-block: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -55,28 +61,112 @@ hr {
     background-color: #051674;
 }
 
-.carousel {
+.carousel-wrapped {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     width: 100%;
     max-width: 500px;
     margin: 20px auto;
-    overflow: hidden;
+    /* overflow: hidden; */
     gap: 10px;
 
-    & .carousel-item {
+    & button {
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        color: #051674;
         display: flex;
-        width: 100%;
-        text-align: center;
-        animation: carousel_movement 10s linear infinite;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        border-radius: 100%;
+        transition: background-color 0.2s ease, color 0.2s ease;
 
+        & span {
+            pointer-events: none;
+            user-select: none;
+        }
+        &:hover {
+            color: #ffffff;
+            background-color: #051674;
+        }
+    }
+    & .carousel-item {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: box-shadow 0.2s ease;
+        height: 300px;
+        width: 300px;
+        border-radius: 10px;
+        
         & img {
+            position: absolute;
             user-select: none;
             pointer-events: none;
-            width: 300px;
-            height: 300px;
-            border-radius: 8px;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
+            border-radius: 10px;
+            transition: filter 0.3s ease;
+        }
+
+        &:not(.focus) {
+            display: none;
+        }
+
+        & p {
+            padding: 5px 10px;
+            border-radius: 0 8px 0 0;
+            color: #051674;
+            font-size: 1em;
+            filter: blur();
+        }
+
+        & h5 {
+            margin: 0;
+            padding: 5px 10px;
+            border-radius: 0 8px 0 0;
+            color: #051674;
+            font-size: 1.8em;
+            filter: blur();
+        }
+        
+        & p, h5, a {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        & a {
+            width: fit-content;
+            color: #051674;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 15px;
+            border-radius: 100px;
+            transition: background-color 0.3s ease, color 0.3s ease, opacity 0.3s ease;
+            z-index: 1;
+            &:hover { 
+                background-color: #051674;
+                color: white;
+            }    
+        }
+        
+
+        &:hover {
+            cursor: pointer;
+            
+            & img {
+                filter: blur(4px);
+            }
+            & p, h5, a {
+                opacity: 1;
+            }
         }
     }
 }
